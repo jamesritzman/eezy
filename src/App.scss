@@ -1,27 +1,29 @@
+$header-height: 80px;
+$horizontal-padding: 20px;
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  overflow: hidden;
+  height: 100%;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
+.App {
+  height: 100%;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: $header-height 1fr;
 
+  > header {
+    background-color: #eaeaea;
+    padding: 0 $horizontal-padding;
 
-.card {
-  padding: 2em;
-}
+    > h1 {
+      line-height: $header-height;
+    }
+  }
 
-.read-the-docs {
-  color: #888;
+  > main {
+    height: 100%;
+    overflow: auto;
+    padding: 30px $horizontal-padding;
+  }
 }
