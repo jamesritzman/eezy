@@ -1,0 +1,10 @@
+.breed-picker-container {
+    
+    .breed-picker-row {
+        display: grid;
+        grid-template-columns: minmax(0, 15vw) minmax(0, 15vw) 40px 40px;
+        gap: 15px;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+}
