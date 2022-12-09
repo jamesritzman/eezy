@@ -19,6 +19,21 @@ const handleBreedChange = (e, row, selectedBreeds, setSelectedBreeds) => {
     setSelectedBreeds(priorSelectedBreeds);
 };
 
+const handleSubBreedChange = (e, row, selectedBreeds, setSelectedBreeds) => {
+    console.log("Sub-Breed event: ", e);
+
+    // Make a (deep) copy of prior list, then update
+    const priorSelectedBreeds = [...selectedBreeds];
+    priorSelectedBreeds[row].subBreed = e.target.value;
+    setSelectedBreeds(priorSelectedBreeds);
+};
+
+const handleAddRowOfInputs = (selectedBreeds, setSelectedBreeds) => {
+    const priorSelectedBreeds = [...selectedBreeds];
+    priorSelectedBreeds.push({breed: '', subBreed: ''});
+    setSelectedBreeds(priorSelectedBreeds);
+};
+
 
 const InputGroup = (props) => {
     const {
@@ -28,23 +43,6 @@ const InputGroup = (props) => {
         selectedBreeds,
         setSelectedBreeds,
     } = props;
-
-
-    
-    const handleSubBreedChange = (e, row, selectedBreeds, setSelectedBreeds) => {
-        console.log("Sub-Breed event: ", e);
-
-        // Make a (deep) copy of prior list, then update
-        const priorSelectedBreeds = [...selectedBreeds];
-        priorSelectedBreeds[row].subBreed = e.target.value;
-        setSelectedBreeds(priorSelectedBreeds);
-    };
-
-    const handleAddRowOfInputs = (selectedBreeds, setSelectedBreeds) => {
-        const priorSelectedBreeds = [...selectedBreeds];
-        priorSelectedBreeds.push({breed: '', subBreed: ''});
-        setSelectedBreeds(priorSelectedBreeds);
-    };
 
 
     return (
