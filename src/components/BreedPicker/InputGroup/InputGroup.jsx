@@ -2,8 +2,23 @@ import {
     FormControl,
     InputLabel,
     Select,
-    MenuItem
+    MenuItem,
+    Button,
 } from '@mui/material';
+
+
+const handleBreedChange = (e, row, selectedBreeds, setSelectedBreeds) => {
+    console.log("handleBreedChange event is: ", e);
+    console.log("Breed control row is: " + row);
+
+    // Make a (deep) copy of prior list, then update
+    const priorSelectedBreeds = [...selectedBreeds];
+    priorSelectedBreeds[row].breed = e.target.value;
+    // Reset the subBreed since we have a new main breed
+    priorSelectedBreeds[row].subBreed = '';
+    setSelectedBreeds(priorSelectedBreeds);
+};
+
 
 const InputGroup = (props) => {
     const {
@@ -14,17 +29,7 @@ const InputGroup = (props) => {
         setSelectedBreeds,
     } = props;
 
-    const handleBreedChange = (e, row, selectedBreeds, setSelectedBreeds) => {
-        console.log("handleBreedChange event is: ", e);
-        console.log("Breed control row is: " + row);
 
-        // Make a (deep) copy of prior list, then update
-        const priorSelectedBreeds = [...selectedBreeds];
-        priorSelectedBreeds[row].breed = e.target.value;
-        // Reset the subBreed since we have a new main breed
-        priorSelectedBreeds[row].subBreed = '';
-        setSelectedBreeds(priorSelectedBreeds);
-    };
     
     const handleSubBreedChange = (e, row, selectedBreeds, setSelectedBreeds) => {
         console.log("Sub-Breed event: ", e);
@@ -33,8 +38,6 @@ const InputGroup = (props) => {
         const priorSelectedBreeds = [...selectedBreeds];
         priorSelectedBreeds[row].subBreed = e.target.value;
         setSelectedBreeds(priorSelectedBreeds);
-
-        // setSelectedBreeds(prev => {const newData = prev; newData[0].subBreed = e.target.value; console.log("new: ", newData); return newData});
     };
 
     const handleAddRowOfInputs = (selectedBreeds, setSelectedBreeds) => {
@@ -88,8 +91,8 @@ const InputGroup = (props) => {
                     }
                 </Select>
             </FormControl>
-            <button type='button'>#</button>
-            <button type='button' onClick={() => handleAddRowOfInputs(selectedBreeds, setSelectedBreeds)}>+</button>
+            <span># pics</span>
+            <Button variant="text" onClick={() => handleAddRowOfInputs(selectedBreeds, setSelectedBreeds)}>+</Button>
         </div>
     )
 }
