@@ -5,32 +5,44 @@ import {
     MenuItem,
     Button,
 } from '@mui/material';
+import { useQuery } from '@tanstack/react-query';
 
 
-const handleBreedChange = (e, row, selectedBreeds, setSelectedBreeds) => {
-    console.log("handleBreedChange event is: ", e);
-    console.log("Breed control row is: " + row);
+const getImagesListByBreed = async (selectedBreed, selectedSubBreed = null) => {
+    if (selectedBreed === '') return {message: []}
+    const response = await fetch(`https://dog.ceo/api/breed/${selectedBreed}/${selectedSubBreed ? selectedSubBreed + '/' : ''}images`);
+    if (!response.ok) {
+        throw new Error('Network response for fetching images by breed was not ok');
+    }
+    return response.json();
+};
 
+const handleBreedChange = async (e, row, selectedBreeds, setSelectedBreeds) => {
     // Make a (deep) copy of prior list, then update
     const priorSelectedBreeds = [...selectedBreeds];
+    // Update the value of the chosen breed for the affected row of controls
     priorSelectedBreeds[row].breed = e.target.value;
     // Reset the subBreed since we have a new main breed
     priorSelectedBreeds[row].subBreed = '';
+    // Fetch images list for the newly selected breed
+    const imagesList = await getImagesListByBreed(priorSelectedBreeds[row].breed);
+    priorSelectedBreeds[row].imageCount = imagesList.message.length;
     setSelectedBreeds(priorSelectedBreeds);
 };
 
-const handleSubBreedChange = (e, row, selectedBreeds, setSelectedBreeds) => {
-    console.log("Sub-Breed event: ", e);
-
+const handleSubBreedChange = async (e, row, selectedBreeds, setSelectedBreeds) => {
     // Make a (deep) copy of prior list, then update
     const priorSelectedBreeds = [...selectedBreeds];
     priorSelectedBreeds[row].subBreed = e.target.value;
+    // Fetch images list for the newly selected sub-breed
+    const imagesList = await getImagesListByBreed(priorSelectedBreeds[row].breed, priorSelectedBreeds[row].subBreed);
+    priorSelectedBreeds[row].imageCount = imagesList.message.length;
     setSelectedBreeds(priorSelectedBreeds);
 };
 
 const handleAddRowOfInputs = (selectedBreeds, setSelectedBreeds) => {
     const priorSelectedBreeds = [...selectedBreeds];
-    priorSelectedBreeds.push({breed: '', subBreed: ''});
+    priorSelectedBreeds.push({breed: '', subBreed: '', imageCount: 0});
     setSelectedBreeds(priorSelectedBreeds);
 };
 
@@ -43,6 +55,20 @@ const InputGroup = (props) => {
         selectedBreeds,
         setSelectedBreeds,
     } = props;
+
+
+    const { isLoading, isError, data: breedImagesList, error } = useQuery({
+        queryKey: ['getImageList', selectedBreedInfo.breed, selectedBreedInfo.subBreed],
+        queryFn: () => getImagesListByBreed(selectedBreedInfo.breed, selectedBreedInfo.subBreed)
+    });
+
+    if (isLoading) {
+        return <span>Loading...</span>
+    }
+
+    if (isError) {
+        return <span>Error: {error.message}</span>
+    }
 
 
     return (
@@ -89,7 +115,7 @@ const InputGroup = (props) => {
                     }
                 </Select>
             </FormControl>
-            <span># pics</span>
+            <span>{`${breedImagesList.message.length} pics`}</span>
             <Button variant="text" onClick={() => handleAddRowOfInputs(selectedBreeds, setSelectedBreeds)}>+</Button>
         </div>
     )
