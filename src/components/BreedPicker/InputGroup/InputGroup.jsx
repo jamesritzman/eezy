@@ -24,9 +24,6 @@ const handleBreedChange = async (e, row, selectedBreeds, setSelectedBreeds) => {
     priorSelectedBreeds[row].breed = e.target.value;
     // Reset the subBreed since we have a new main breed
     priorSelectedBreeds[row].subBreed = '';
-    // Fetch images list for the newly selected breed
-    const imagesList = await getImagesListByBreed(priorSelectedBreeds[row].breed);
-    priorSelectedBreeds[row].imageCount = imagesList.message.length;
     setSelectedBreeds(priorSelectedBreeds);
 };
 
@@ -34,9 +31,6 @@ const handleSubBreedChange = async (e, row, selectedBreeds, setSelectedBreeds) =
     // Make a (deep) copy of prior list, then update
     const priorSelectedBreeds = [...selectedBreeds];
     priorSelectedBreeds[row].subBreed = e.target.value;
-    // Fetch images list for the newly selected sub-breed
-    const imagesList = await getImagesListByBreed(priorSelectedBreeds[row].breed, priorSelectedBreeds[row].subBreed);
-    priorSelectedBreeds[row].imageCount = imagesList.message.length;
     setSelectedBreeds(priorSelectedBreeds);
 };
 
@@ -80,7 +74,7 @@ const InputGroup = (props) => {
                     id='breed-select'
                     value={selectedBreedInfo.breed}
                     label='Breed'
-                    onChange={(e) => handleBreedChange(e, rowId, selectedBreeds, setSelectedBreeds)}
+                    onChange={(e) => handleBreedChange(e, rowId, selectedBreeds, setSelectedBreeds, getImagesListByBreed)}
                 >
                     {
                         Object.keys(breeds).map((primaryBreed) => {
@@ -100,7 +94,7 @@ const InputGroup = (props) => {
                     id='sub-breed-select'
                     value={selectedBreedInfo.subBreed}
                     label='Sub-Breed'
-                    onChange={(e) => handleSubBreedChange(e, rowId, selectedBreeds, setSelectedBreeds)}
+                    onChange={(e) => handleSubBreedChange(e, rowId, selectedBreeds, setSelectedBreeds, getImagesListByBreed)}
                 >
                     {
                         breeds[selectedBreedInfo.breed]?.length 

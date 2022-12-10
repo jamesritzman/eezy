@@ -20,7 +20,7 @@ const BreedPicker = () => {
 
     // STATE
     // User selections of all rows
-    const [selectedBreeds, setSelectedBreeds] = useState([{breed: '', subBreed: '', imageCount: 0}]);
+    const [selectedBreeds, setSelectedBreeds] = useState([{breed: '', subBreed: ''}]);
 
     // Get raw breeds data
     const { isLoading, isError, data: rawBreedsData, error } = useQuery({
