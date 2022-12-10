@@ -26,7 +26,7 @@ const getImagesListByBreed = async (selectedBreed, selectedSubBreed = null) => {
 const InputGroup = (props) => {
     const {
         selectedBreedInfo,
-        breeds,
+        allBreeds,
         rowId,
         selectedBreeds,
         setSelectedBreeds,
@@ -59,7 +59,7 @@ const InputGroup = (props) => {
                     onChange={(e) => handleBreedChange(e, rowId, selectedBreeds, setSelectedBreeds)}
                 >
                     {
-                        Object.keys(breeds).map((primaryBreed) => {
+                        Object.keys(allBreeds).map((primaryBreed) => {
                             return (
                                 <MenuItem value={primaryBreed} key={primaryBreed}>
                                     {primaryBreed}
@@ -79,8 +79,8 @@ const InputGroup = (props) => {
                     onChange={(e) => handleSubBreedChange(e, rowId, selectedBreeds, setSelectedBreeds)}
                 >
                     {
-                        breeds[selectedBreedInfo.breed]?.length 
-                        ? breeds[selectedBreedInfo.breed].map((subBreed) => {
+                        allBreeds[selectedBreedInfo.breed]?.length 
+                        ? allBreeds[selectedBreedInfo.breed].map((subBreed) => {
                             return (
                                 <MenuItem value={subBreed} key={subBreed}>
                                     {subBreed}

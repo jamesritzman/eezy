@@ -45,7 +45,7 @@ const BreedPicker = () => {
                         return (
                             <InputGroup
                                 selectedBreedInfo={selectedBreedInfo}
-                                breeds={rawBreedsData.message}
+                                allBreeds={rawBreedsData.message}
                                 rowId={idx}
                                 selectedBreeds={selectedBreeds}
                                 setSelectedBreeds={setSelectedBreeds}
