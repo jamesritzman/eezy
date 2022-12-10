@@ -6,6 +6,11 @@ import {
     Button,
 } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
+import {
+    handleBreedChange,
+    handleSubBreedChange,
+    handleAddRowOfInputs,
+} from './InputGroupHelpers';
 
 
 const getImagesListByBreed = async (selectedBreed, selectedSubBreed = null) => {
@@ -15,29 +20,6 @@ const getImagesListByBreed = async (selectedBreed, selectedSubBreed = null) => {
         throw new Error('Network response for fetching images by breed was not ok');
     }
     return response.json();
-};
-
-const handleBreedChange = async (e, row, selectedBreeds, setSelectedBreeds) => {
-    // Make a (deep) copy of prior list, then update
-    const priorSelectedBreeds = [...selectedBreeds];
-    // Update the value of the chosen breed for the affected row of controls
-    priorSelectedBreeds[row].breed = e.target.value;
-    // Reset the subBreed since we have a new main breed
-    priorSelectedBreeds[row].subBreed = '';
-    setSelectedBreeds(priorSelectedBreeds);
-};
-
-const handleSubBreedChange = async (e, row, selectedBreeds, setSelectedBreeds) => {
-    // Make a (deep) copy of prior list, then update
-    const priorSelectedBreeds = [...selectedBreeds];
-    priorSelectedBreeds[row].subBreed = e.target.value;
-    setSelectedBreeds(priorSelectedBreeds);
-};
-
-const handleAddRowOfInputs = (selectedBreeds, setSelectedBreeds) => {
-    const priorSelectedBreeds = [...selectedBreeds];
-    priorSelectedBreeds.push({breed: '', subBreed: '', imageCount: 0});
-    setSelectedBreeds(priorSelectedBreeds);
 };
 
 
@@ -74,7 +56,7 @@ const InputGroup = (props) => {
                     id='breed-select'
                     value={selectedBreedInfo.breed}
                     label='Breed'
-                    onChange={(e) => handleBreedChange(e, rowId, selectedBreeds, setSelectedBreeds, getImagesListByBreed)}
+                    onChange={(e) => handleBreedChange(e, rowId, selectedBreeds, setSelectedBreeds)}
                 >
                     {
                         Object.keys(breeds).map((primaryBreed) => {
@@ -94,7 +76,7 @@ const InputGroup = (props) => {
                     id='sub-breed-select'
                     value={selectedBreedInfo.subBreed}
                     label='Sub-Breed'
-                    onChange={(e) => handleSubBreedChange(e, rowId, selectedBreeds, setSelectedBreeds, getImagesListByBreed)}
+                    onChange={(e) => handleSubBreedChange(e, rowId, selectedBreeds, setSelectedBreeds)}
                 >
                     {
                         breeds[selectedBreedInfo.breed]?.length 
