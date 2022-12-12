@@ -15,10 +15,13 @@ const getBreeds = async () => {
     return response.json();
 };
 
-const handleDisplayImagesButtonClick = () => {
-    console.log("display images...");
-};
+const ImagesModal = (props) => {
+    const { onClick } = props;
 
+    return (
+        <div style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'lightblue', zIndex: 20}} onClick={onClick}></div>
+    )
+};
 
 
 const BreedPicker = () => {
@@ -26,6 +29,7 @@ const BreedPicker = () => {
     // STATE
     // User selections of all rows
     const [selectedBreeds, setSelectedBreeds] = useState([{breed: '', subBreed: ''}]);
+    const [showModal, setShowModal] = useState(false);
 
     // Get raw breeds data
     const { isLoading, isError, data: rawBreedsData, error } = useQuery({
@@ -61,7 +65,8 @@ const BreedPicker = () => {
                     })
                 }
             </div>
-            <Button onClick={handleDisplayImagesButtonClick} variant="outlined">Display Images</Button>
+            <Button onClick={() => {setShowModal(true)}} variant="outlined">Display Images</Button>
+            { showModal && <ImagesModal onClick={() => {setShowModal(false)}} /> }
             {/* <p>{JSON.stringify(rawBreedsData.message)}</p> */}
         </>
     )
