@@ -59,7 +59,7 @@ const BreedPicker = () => {
                 }
             </div>
             <Button onClick={() => {setShowModal(true)}} variant="outlined">Display Images</Button>
-            { showModal && <ImagesModal onClick={() => {setShowModal(false)}} /> }
+            { showModal && <ImagesModal onClick={() => {setShowModal(false)}} selectedBreeds={selectedBreeds} /> }
             {/* <p>{JSON.stringify(rawBreedsData.message)}</p> */}
         </>
     )

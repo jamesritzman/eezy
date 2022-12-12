@@ -1,7 +1,7 @@
 import './ImagesModal.scss';
 
 const ImagesModal = (props) => {
-    const { onClick } = props;
+    const { onClick, selectedBreeds } = props;
 
     return (
         <div
@@ -9,7 +9,11 @@ const ImagesModal = (props) => {
             onClick={onClick}
         >
             <div className="images-modal-content-wrapper">
-                Images here...
+                {
+                    selectedBreeds.map((breedInfo, idx) => {
+                        return <p key={idx}>{breedInfo.breed} - {breedInfo.subBreed || 'none'}</p>
+                    })
+                }
             </div>
         </div>
     )
