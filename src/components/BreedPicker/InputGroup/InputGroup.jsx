@@ -28,6 +28,7 @@ const InputGroup = (props) => {
         selectedBreedInfo,
         allBreeds,
         rowId,
+        isLastRow,
         selectedBreeds,
         setSelectedBreeds,
     } = props;
@@ -92,7 +93,7 @@ const InputGroup = (props) => {
                 </Select>
             </FormControl>
             <span>{`${breedImagesList.message.length} pics`}</span>
-            <Button variant="text" onClick={() => handleAddRowOfInputs(selectedBreeds, setSelectedBreeds)}>+</Button>
+            { isLastRow && <Button variant="text" onClick={() => handleAddRowOfInputs(selectedBreeds, setSelectedBreeds)}>+</Button> }
         </div>
     )
 }

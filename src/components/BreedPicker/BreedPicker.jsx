@@ -1,6 +1,7 @@
 import { useState } from 'react';
 // 3rd party
 import { useQuery } from '@tanstack/react-query';
+import { Button } from '@mui/material';
 // Internal
 import InputGroup from './InputGroup/InputGroup';
 // Styles
@@ -12,6 +13,10 @@ const getBreeds = async () => {
         throw new Error('Network response was not ok');
     }
     return response.json();
+};
+
+const handleDisplayImagesButtonClick = () => {
+    console.log("display images...");
 };
 
 
@@ -47,6 +52,7 @@ const BreedPicker = () => {
                                 selectedBreedInfo={selectedBreedInfo}
                                 allBreeds={rawBreedsData.message}
                                 rowId={idx}
+                                isLastRow={(idx === selectedBreeds.length - 1)}
                                 selectedBreeds={selectedBreeds}
                                 setSelectedBreeds={setSelectedBreeds}
                                 key={idx}
@@ -55,7 +61,8 @@ const BreedPicker = () => {
                     })
                 }
             </div>
-            <p>{JSON.stringify(rawBreedsData.message)}</p>
+            <Button onClick={handleDisplayImagesButtonClick} variant="outlined">Display Images</Button>
+            {/* <p>{JSON.stringify(rawBreedsData.message)}</p> */}
         </>
     )
 }
