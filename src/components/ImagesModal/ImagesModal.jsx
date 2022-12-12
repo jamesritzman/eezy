@@ -9,7 +9,7 @@ const ImagesModal = (props) => {
             onClick={onClick}
         >
             <div className="images-modal-content-wrapper">
-
+                Images here...
             </div>
         </div>
     )
