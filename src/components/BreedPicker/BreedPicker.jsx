@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Button } from '@mui/material';
 // Internal
 import InputGroup from './InputGroup/InputGroup';
+import ImagesModal from '../ImagesModal/ImagesModal';
 // Styles
 import './BreedPicker.scss';
 
@@ -13,14 +14,6 @@ const getBreeds = async () => {
         throw new Error('Network response was not ok');
     }
     return response.json();
-};
-
-const ImagesModal = (props) => {
-    const { onClick } = props;
-
-    return (
-        <div style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'lightblue', zIndex: 20}} onClick={onClick}></div>
-    )
 };
 
 
