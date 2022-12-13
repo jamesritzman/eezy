@@ -11,16 +11,7 @@ import {
     handleSubBreedChange,
     handleAddRowOfInputs,
 } from './InputGroupHelpers';
-
-
-const getImagesListByBreed = async (selectedBreed, selectedSubBreed = null) => {
-    if (selectedBreed === '') return {message: []}
-    const response = await fetch(`https://dog.ceo/api/breed/${selectedBreed}/${selectedSubBreed ? selectedSubBreed + '/' : ''}images`);
-    if (!response.ok) {
-        throw new Error('Network response for fetching images by breed was not ok');
-    }
-    return response.json();
-};
+import { getImagesListByBreed } from '../BreedPickerHelpers';
 
 
 const InputGroup = (props) => {
@@ -82,6 +73,7 @@ const InputGroup = (props) => {
                     {
                         allBreeds[selectedBreedInfo.breed]?.length 
                         ? allBreeds[selectedBreedInfo.breed].map((subBreed) => {
+                            // TODO: add an "All" option as well
                             return (
                                 <MenuItem value={subBreed} key={subBreed}>
                                     {subBreed}

@@ -15,5 +15,13 @@
         background-color: #555;
         display: flex;
         flex-wrap: wrap;
+        overflow: auto;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+
+    .dog-image {
+        max-width: 300px;
+        margin-bottom: 20px;
     }
 }
