@@ -8,6 +8,7 @@ import ImagesModal from '../ImagesModal/ImagesModal';
 // Styles
 import './BreedPicker.scss';
 
+
 const getBreeds = async () => {
     const response = await fetch('https://dog.ceo/api/breeds/list/all');
     if (!response.ok) {
