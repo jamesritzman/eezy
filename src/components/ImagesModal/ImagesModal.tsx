@@ -9,7 +9,7 @@ type ImageListQueryResult = {
     }
 }
 
-type SelectedBreed = {
+export type SelectedBreed = {
     breed: string,
     subBreed: string
 }
