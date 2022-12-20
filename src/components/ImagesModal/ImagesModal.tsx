@@ -3,7 +3,24 @@ import { getImagesListByBreed } from '../BreedPicker/BreedPickerHelpers';
 import './ImagesModal.scss';
 
 
-const ImagesModal = (props) => {
+type ImageListQueryResult = {
+    data?: {
+        message?: string[]
+    }
+}
+
+type SelectedBreed = {
+    breed: string,
+    subBreed: string
+}
+
+type ImagesModalType = {
+    onClick: Function,
+    selectedBreeds: SelectedBreed[]
+}
+
+
+const ImagesModal = (props: ImagesModalType) => {
     const { onClick, selectedBreeds } = props;
 
     const imageListQueries = useQueries({
@@ -17,8 +34,8 @@ const ImagesModal = (props) => {
 
     // De-dupe the queries result in case the user selected the same combination of breed/sub-breed more than once,
     //  or in case the same image appears in both lists
-    const imageUrlsSet = new Set();
-    imageListQueries.forEach((imageListQueryResult) => {
+    const imageUrlsSet: Set<string> = new Set();
+    imageListQueries.forEach((imageListQueryResult: ImageListQueryResult) => {
         if (imageListQueryResult?.data?.message?.length) {
             imageListQueryResult.data.message.forEach((imageUrl) => {
                 imageUrlsSet.add(imageUrl);

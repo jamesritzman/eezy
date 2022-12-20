@@ -1,4 +1,4 @@
-export const getImagesListByBreed = async (selectedBreed, selectedSubBreed = null) => {
+export const getImagesListByBreed = async (selectedBreed: string, selectedSubBreed = '') => {
     if (selectedBreed === '') return {message: []}
     const response = await fetch(`https://dog.ceo/api/breed/${selectedBreed}/${selectedSubBreed ? selectedSubBreed + '/' : ''}images`);
     if (!response.ok) {
