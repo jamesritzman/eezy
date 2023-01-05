@@ -67,30 +67,4 @@ const BreedPicker = () => {
     )
 }
 
-/*
-            <p>{JSON.stringify(rawBreedsData.message)}</p>
-            <ol>
-                {
-                    Object.keys(rawBreedsData.message).map((primaryBreed) => {
-                        return (
-                            <li key={primaryBreed}>
-                                {primaryBreed}
-                                {
-                                    rawBreedsData.message[primaryBreed].length > 0 && (
-                                        <ul>
-                                            {
-                                                rawBreedsData.message[primaryBreed].map((subBreed) => {
-                                                    return <li key={subBreed}>{subBreed}</li>
-                                                })
-                                            }
-                                        </ul>
-                                    )
-                                }
-                            </li>
-                        )
-                    })
-                }
-            </ol>
-*/
-
 export default BreedPicker;

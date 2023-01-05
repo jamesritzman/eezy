@@ -14,7 +14,7 @@ import {
 import { getImagesListByBreed } from '../BreedPickerHelpers';
 
 
-type InputGroupTypes = {
+type InputGroupPropTypes = {
     selectedBreedInfo: {breed: string, subBreed: string}
     allBreeds: {[key: string]: string[]},
     rowId: number,
@@ -22,7 +22,7 @@ type InputGroupTypes = {
     selectedBreeds: {breed: string, subBreed: string}[],
     setSelectedBreeds: Function
 }
-const InputGroup = (props: InputGroupTypes) => {
+const InputGroup = (props: InputGroupPropTypes) => {
     const {
         selectedBreedInfo,
         allBreeds,

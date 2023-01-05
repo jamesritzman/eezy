@@ -14,13 +14,13 @@ export type SelectedBreed = {
     subBreed: string
 }
 
-type ImagesModalType = {
+type ImagesModalPropTypes = {
     onClick: Function,
     selectedBreeds: SelectedBreed[]
 }
 
 
-const ImagesModal = (props: ImagesModalType) => {
+const ImagesModal = (props: ImagesModalPropTypes) => {
     const { onClick, selectedBreeds } = props;
 
     const imageListQueries = useQueries({
