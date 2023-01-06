@@ -60,35 +60,8 @@ const BreedPicker = () => {
             </div>
             <Button onClick={() => {setShowModal(true)}} variant="outlined">Display Images</Button>
             { showModal && <ImagesModal onClick={() => {setShowModal(false)}} selectedBreeds={selectedBreeds} /> }
-            {/* <p>{JSON.stringify(rawBreedsData.message)}</p> */}
         </>
     )
 }
-
-/*
-            <p>{JSON.stringify(rawBreedsData.message)}</p>
-            <ol>
-                {
-                    Object.keys(rawBreedsData.message).map((primaryBreed) => {
-                        return (
-                            <li key={primaryBreed}>
-                                {primaryBreed}
-                                {
-                                    rawBreedsData.message[primaryBreed].length > 0 && (
-                                        <ul>
-                                            {
-                                                rawBreedsData.message[primaryBreed].map((subBreed) => {
-                                                    return <li key={subBreed}>{subBreed}</li>
-                                                })
-                                            }
-                                        </ul>
-                                    )
-                                }
-                            </li>
-                        )
-                    })
-                }
-            </ol>
-*/
 
 export default BreedPicker;
